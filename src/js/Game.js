@@ -3,16 +3,22 @@ export default class Game {
     this.boardSize = boardSize;
   }
 
+  /**
+   * Запуск игры
+   */
   init() {
-    this.generateBoard();
-    this.showRandomGoblins();
+    this.board = this.generateBoard(); // генерируем доску
+    this.insertBoardOnPage(this.board); // вставляем её на страницу
+    this.showRandomGoblins(); // показываем гоблинов с интервалом 1 сек
   }
 
+  /**
+   * Создание доски для игры в виде HTML-таблицы
+   * @returns {HTMLElement} вёрстка table
+   */
   generateBoard() {
-    // Создаём поле в виде таблицы
-    this.board = document.createElement('table');
-    this.board.classList.add('board');
-    // Создаём таблицу
+    const board = document.createElement('table');
+    board.classList.add('board');
     for (let i = 0; i < this.boardSize; i += 1) {
       const boardRow = document.createElement('tr');
       boardRow.classList.add('board__row');
@@ -21,11 +27,22 @@ export default class Game {
         boardCol.classList.add('board__col');
         boardRow.appendChild(boardCol);
       }
-      this.board.appendChild(boardRow);
+      board.appendChild(boardRow);
     }
-    document.getElementById('game-board').appendChild(this.board);
+    return board;
   }
 
+  /**
+   * Вставка доски в виде HTML-таблицы на страницу
+   * @param {HTMLElement} board доска в виде таблицы, которую необходимо вставить на страницу
+   */
+  insertBoardOnPage(board) {
+    document.getElementById('game-board').appendChild(board);
+  }
+
+  /**
+   * Показывает гоблинов в таблице в случайном порядке
+   */
   showRandomGoblins() {
     const cells = document.getElementsByClassName('board__col');
     setInterval(() => {
@@ -38,6 +55,11 @@ export default class Game {
     }, 1000);
   }
 
+  /**
+   * Генерирует случайное число в зависимости от количества клеток в доске
+   * @param {number} boardSize Количество клеток доски по одной из сторон
+   * @returns {number} случайное число в диапазоне от 0 до количества клеток доски (последнее число не включается для использования в качестве индекса)
+   */
   generateRandomCell(boardSize) {
     const min = 0;
     const max = Math.floor(boardSize ** 2);
