@@ -26,7 +26,7 @@ environment:
 deploy_script:
   - git config --global credential.helper store
   - ps: Set-Content -Path "$HOME\.git-credentials" -Value "https://$($env:access_token):x-oauth-basic@github.com`n" -NoNewline
-  - git config --global user.email "Your email"
-  - git config --global user.name "Your Name"
-  - git commit ...
-  - git push ...
+  - git config --global user.email "alexeenkov-frontend@yandex.ru"
+  - git config --global user.name "Ilya"
+  - git commit -m 'Выполнена сборка на appveyor'
+  - git push
