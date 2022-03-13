@@ -25,3 +25,15 @@ deploy_script:  # скрипт развёртывания
   - git config --global user.email ci@appveyor.com
   - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"
   - npx push-dir --dir=dist --branch=gh-pages --force --verbose
+
+environment:
+  access_token:
+  secure: dJS6qdyA6I7Dj0wGoYiUUpy1+QHPpkKJbHd+lPlG6sAM1EK3hwfxgzh4yPRx47qG
+
+on_success:
+  - git config --global credential.helper store
+  - ps: Set-Content -Path "$HOME\.git-credentials" -Value "https://$($env:access_token):x-oauth-basic@github.com`n" -NoNewline
+  - git config --global user.email "Your email"
+  - git config --global user.name "Your Name"
+  - git commit ...
+  - git push ...
