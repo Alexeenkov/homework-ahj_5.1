@@ -1,5 +1,5 @@
-import Game from './Game';
+import Validator from './Validator';
 
-const game = new Game(4);
+const validator = new Validator();
 
-game.init();
+validator.init();
