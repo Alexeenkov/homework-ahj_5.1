@@ -19,10 +19,6 @@ build_script:
 test_script:
   - npm run lint && npm test  # скрипт тестирования
 
-environment:
-  access_token:
-  secure: dJS6qdyA6I7Dj0wGoYiUUpy1+QHPpkKJbHd+lPlG6sAM1EK3hwfxgzh4yPRx47qG
-
 deploy_script:
   - git config --global credential.helper store
   - ps: Set-Content -Path "$HOME\.git-credentials" -Value "https://$($env:access_token):x-oauth-basic@github.com`n" -NoNewline

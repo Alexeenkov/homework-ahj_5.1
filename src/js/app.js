@@ -1,5 +1,7 @@
-import Validator from './Validator';
+import Popover from './Popover';
 
-const validator = new Validator();
+const popover = new Popover();
 
-validator.init();
+document.addEventListener('DOMContentLoaded', () => {
+  popover.init();
+});
